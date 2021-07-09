@@ -3,6 +3,7 @@ package login
 import (
 	pojo "../../pojo"
 	result "../../pojo/result"
+	util "../../util"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -16,28 +17,25 @@ import (
  **/
 
 // Login 用户登录
-func Login(w http.ResponseWriter, req *http.Request) {
+func Login(response http.ResponseWriter, request *http.Request) {
 	// ----- 处理参数
-	err := req.ParseForm()
-	if err != nil {
-		result.Result(w, result.Failed("参数获取失败"))
+	requestFrom := util.RequestFrom(response, request)
+	if !requestFrom {
 		return
 	}
-	account, found1 := req.Form["account"]
-	password, found2 := req.Form["password"]
-	if !(found1 && found2) {
-		log.Println("login error. param > account:", account, "password:", password)
-		result.Result(w, result.Failed("参数错误"))
-		return
+
+	loginUser := pojo.LoginUser{
+		Account:  util.RequestParamToString("account", false, response, request),
+		Password: util.RequestParamToString("password", false, response, request),
 	}
-	loginUser := pojo.LoginUser{Account: account[0], Password: password[0]}
+
 	log.Println("user Login, param:", loginUser)
-	result.Result(w, result.Success(loginUser))
+	result.Result(response, result.Success(loginUser))
 }
 
 // Logout 用户登出
-func Logout(w http.ResponseWriter, req *http.Request) {
-	log.Println("user Logout, param:", req)
+func Logout(w http.ResponseWriter, request *http.Request) {
+	log.Println("user Logout, param:", request)
 	bytes, _ := json.Marshal(result.Success("Login"))
 	w.Write(bytes)
 }

@@ -30,9 +30,9 @@ func Failed(message string) *ResponseEnvelope {
 }
 
 // Result 接口调用失败
-func Result(w http.ResponseWriter, result *ResponseEnvelope) {
+func Result(response http.ResponseWriter, result *ResponseEnvelope) {
 	bytes, _ := json.Marshal(result)
-	write, err := w.Write(bytes)
+	write, err := response.Write(bytes)
 	if err != nil {
 		log.Println("Response result error.", write, err)
 	}

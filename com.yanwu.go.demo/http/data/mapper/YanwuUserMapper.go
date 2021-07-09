@@ -21,3 +21,15 @@ func SaveUser(user *model.YanwuUser) uint {
 	}
 	return user.ID
 }
+
+func AllUser() []model.YanwuUser {
+	var result []model.YanwuUser
+	dataSource.DataSource.Find(&result)
+	return result
+}
+
+func GetById(id uint) model.YanwuUser {
+	var user model.YanwuUser
+	dataSource.DataSource.First(&user, id)
+	return user
+}

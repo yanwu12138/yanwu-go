@@ -1,9 +1,9 @@
 package source
 
 import (
-	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"log"
 )
 
 /**
@@ -26,9 +26,9 @@ func InitDataSource() {
 		SkipInitializeWithVersion: false,                                                                                          // 根据当前 MySQL 版本自动配置
 	}), &gorm.Config{})
 	if err != nil {
-		fmt.Println("failed to open database:", err.Error())
+		log.Println("failed to open database:", err.Error())
 		return
 	}
 	DataSource = db
-	fmt.Println("database init success:")
+	log.Println("database init success.")
 }

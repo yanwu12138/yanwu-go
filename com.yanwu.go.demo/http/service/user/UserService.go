@@ -15,3 +15,11 @@ import (
 func Create(user *model.YanwuUser) uint {
 	return mapper.SaveUser(user)
 }
+
+func AllUser() []model.YanwuUser {
+	return mapper.AllUser()
+}
+
+func GetById(id uint) model.YanwuUser {
+	return mapper.GetById(id)
+}

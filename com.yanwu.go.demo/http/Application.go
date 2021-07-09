@@ -21,9 +21,9 @@ func init() {
 }
 
 func main() {
-	log.Println("This is webserver base!")
 
 	RequestAgent()
+	log.Println("http server start done.")
 
 	//服务器要监听的主机地址和端口号
 	err := http.ListenAndServe("127.0.0.1:8081", nil)
