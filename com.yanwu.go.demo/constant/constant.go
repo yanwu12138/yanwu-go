@@ -16,3 +16,5 @@ const (
 	MAN   = true
 	WOMAN = false
 )
+
+const PASSWORD = "123456"

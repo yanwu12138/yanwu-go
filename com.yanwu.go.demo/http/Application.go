@@ -3,6 +3,7 @@ package main
 import (
 	login "./controller/login"
 	user "./controller/user"
+	dataSource "./data/source"
 	"log"
 	"net/http"
 )
@@ -15,8 +16,8 @@ import (
  **/
 
 func init() {
-	log.SetPrefix("yanwu go demo for HTTP: ")
-	log.SetFlags(log.Ldate | log.Lmicroseconds | log.Llongfile)
+	initLog()
+	dataSource.InitDataSource()
 }
 
 func main() {
@@ -42,4 +43,9 @@ func RequestAgent() {
 	http.HandleFunc("/user/all", user.All)
 	http.HandleFunc("/user/delete", user.Delete)
 	http.HandleFunc("/user/updatePassword", user.UpdatePassword)
+}
+
+func initLog() {
+	log.SetPrefix("yanwu go demo for HTTP: ")
+	log.SetFlags(log.Ldate | log.Lmicroseconds | log.Llongfile)
 }

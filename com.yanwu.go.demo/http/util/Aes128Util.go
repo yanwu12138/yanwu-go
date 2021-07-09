@@ -15,9 +15,7 @@ import (
  * Description: Aes128加解密工具
  **/
 
-const (
-	SECRET = "yanwu0527@163com" // 使用AES加密和解密的默认密钥
-)
+const SECRET = "yanwu0527@163com" // 使用AES加密和解密的默认密钥
 
 // Encrypt 使用默认密钥对字符串进行加密，输出Base64转码后的字符串
 func Encrypt(content string) string {
